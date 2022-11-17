@@ -1,0 +1,240 @@
+ //select elemnt by id class and element name
+ 
+ <p id="p1">Roll No:229661</p>
+    <p class="class1">Mukesh</p>
+    <h1>Helloo Mcc</h1>
+    <script>
+      $(document).ready(function () {
+        $("#p1").css("color", "red");
+        $("h1").css("color", "blue");
+        $(".class1").css("color", "green");
+      });
+    </script>
+    
+    //on hover off click
+    
+    <button id="b1">hover</button><br />
+    <p>hello welcome in Mulund college of commerce!!</p>
+    <p>TYIT students</p>
+    <button id="b2">off</button><br /><br />
+    <p id="t1">Hello world</p>
+    <br />
+    <button id="b3">on</button><br /><br />
+    <input type="text" value="Hello World" /><br /><br />
+    <button id="b4">trigger</button>
+    <script>
+      $(document).ready(function () {
+        $("#b1").hover(function () {
+          document.write("hello world");
+        });
+        $("p").on("click", function () {
+          $(this).css("background-color", "pink");
+        });
+        $("#b2").click(function () {
+          $("p").off("click");
+        });
+        $("#b3").on("click", function () {
+          $("#t1").hide();
+        });
+        $("input").select(function () {
+          $("input").after("Text marked!");
+        });
+        $("#b4").click(function () {
+          $("input").trigger("select");
+        });
+      });
+    </script>
+    
+    //remove css
+    
+     <p class="intro">Hello World</p>
+    <p class="intro">Hello World welcome to mcc</p>
+    <button>Remove css</button>
+
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          $("p").removeClass("intro");
+        });
+      });
+    </script>
+    
+    //write a jquery to insert multiple html elements at the begining and end of element
+    
+    <button class="b1">Insert Contents</button>
+    <p>Mukesh Maurya</p>
+    <script>
+      $(document).ready(function () {
+        $(".b1").click(function () {
+          var newHeading = "<h1>Important Note:</h1>";
+          var newParagraph = document.createElement("p");
+          newParagraph.innerHTML = "<em>hello world</em>";
+          $("body").append(newHeading, newParagraph);
+        });
+      });
+    </script>
+    
+    //create custom event in jquery
+    
+     Enter your name <input type="text" id="tb" />
+    <input type="button" id="btContinue" value="Submit" />
+    <script>
+      $(document).ready(function () {
+        $("input").keypress(function (event) {
+          if (event.keyCode == 13) $("#btContinue").trigger("click");
+        });
+
+        $("#btContinue").click(function () {
+          alert("Hi, " + $("input").val());
+        });
+      });
+    </script>
+    
+    //chaining
+    
+     <p id="p1">Hello World</p>
+    <button>Click Me</button>
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          $("#p1").css("color", "red").slideUp(2000).slideDown(2000);
+        });
+      });
+    </script>
+    
+    //fade in fade out
+    
+   <p id="p1">Hello World</p>
+    <button class="b1">Fade Out</button>
+    <button class="b2">Fade IN</button>
+    <script>
+      $(document).ready(function () {
+        $(".b1").click(function () {
+          $("#p1").fadeOut();
+        });
+        $(".b2").click(function () {
+          $("#p1").fadeIn();
+        });
+      });
+    </script>
+    
+    //remove parent element of html element from page
+    
+    <style>
+      div {
+        background-color: yellow;
+      }
+      article {
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>This is a paragraph inside a div element.</p>
+    </div>
+    <article>
+      <p>This is a paragraph inside an article element.</p>
+    </article>
+    <button>Remove the parent element of each p element</button>
+
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          $("p").unwrap();
+        });
+      });
+    </script>
+    
+    //get and set text content of elements
+    
+    <button class="b1">Get Paragraph's HTML Contents</button>
+    <p>The quick <b>brown fox</b> jumps over the lazy dog.</p>
+    <button class="b2">Write Message</button>
+    <script>
+      $(document).ready(function () {
+        $(".b1").click(function () {
+          var str = $("p").html();
+          alert(str);
+        });
+        $(".b2").click(function () {
+          $("body").html("<p>Hello World!</p>");
+        });
+      });
+    </script>
+    
+    //slide toggle 
+    
+     <p>Hello Mcc</p>
+    <button>Slide Toggle</button>
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          $("p").slideToggle(2000);
+        });
+      });
+    </script>
+    
+    //insert HTML element at begining and end of elements
+    
+     <button class="b1">Insert Text at Begin</button>
+    <p>welcome in Jquery</p>
+    <button class="b2">Insert Text at End</button>
+    <div id="container">
+      <p>Mulund College of Commerce</p>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $(".b1").click(function () {
+          $("p").prepend("<strong>Note:</strong> ");
+        });
+        $(".b2").click(function () {
+          $("#container").append("This is demo text.");
+        });
+      });
+    </script>
+
+//animate multiple css properties
+
+<style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background: red;
+        border: 2px solid black;
+      }
+    </style>
+    <script src="./jquery-3.6.1.min.js"></script>
+  </head>
+  <body>
+    <button>Animate Me Using Css</button>
+    <div class="box"></div>
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          $(".box").animate({
+            width: "400px",
+            height: "400px",
+            //apply background color
+            backgroundColor: "blue",
+            opacity: 0.5,
+            border: "2px solid black",
+          });
+        });
+      });
+    </script>
+    
+    //callback
+    
+    <p>Roll No:229661</p>
+    <button>Click Me</button>
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          $("p").hide("slow", function () {
+            alert("The paragraph is now hidden");
+          });
+        });
+      });
+    </script>
