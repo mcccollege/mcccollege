@@ -1,0 +1,109 @@
+#insert
+<?php
+   // connect to mongodb
+   $m = new MongoClient();
+	
+   echo "\nConnection to database successfully";
+   
+   $db = $m->MYDB;
+   echo"\nDatabase MYDB selected";
+   $collection=$db->MYCOL;
+   echo"\nCollection selected successfully";
+   
+   $document=array(
+   	"name"=>"Aman",
+	"rollno"=>229744,
+	"likes"=>200,
+	"url"=>"http://www.mongo.com",
+	"by"=>"NoSQL"
+	);
+	$collection->insert($document);
+	echo"\nDocument inserted successfully";
+      
+?>
+
+
+#delete
+<?php
+   // connect to mongodb
+   $m = new MongoClient();
+	
+   echo "\nConnection to database successfully";
+  
+   //select a database
+   $db = $m->MYDB;
+   echo"\nDatabase MYDB selected";
+   $collection=$db->MYCOL;
+   echo"\nCollection selected successfully";
+  
+   //now remove the document
+   $collection->remove(array("name"=>"Anurag Prajapati"));
+   echo"\nDocument deleted successfully";
+
+   //now display the available document 
+   $cursor=$collection->find();
+ 
+   //iterate cursor to display title of documents
+   echo"Available document";
+
+   foreach($cursor as $document){
+	echo $document["name"] . "<br>";
+   }
+      
+?>
+
+#update
+<?php
+   // connect to mongodb
+   $m = new MongoClient();
+	
+   echo "\nConnection to database successfully";
+  
+   //select a database
+   $db = $m->MYDB;
+   echo"\nDatabase MYDB selected";
+   $collection=$db->MYCOL;
+   echo"\nCollection selected successfully";
+  
+   //now update the document
+  $collection->update(array("name"=>"Anurag"),
+	array('$set'=>array("name"=>"Anurag Prajapati")));
+  echo"\nDocument updated successfully";
+
+   //now display the updated document 
+   $cursor=$collection->find();
+ 
+   //iterate cursor to display title of documents
+   echo"Updated document";
+
+   foreach($cursor as $document){
+	echo $document["name"]. "<br>";
+   }
+       
+?>
+
+#retrieve
+<?php
+   // connect to mongodb
+   $m = new MongoClient();
+	
+   echo "\nConnection to database successfully";
+  
+   //select a database
+   $db = $m->MYDB;
+   echo"\nDatabase MYDB selected";
+   $collection=$db->MYCOL;
+   echo"\nCollection selected successfully";
+  
+   $cursor=$collection->find();
+
+   foreach($cursor as $document){
+	echo "<br>" .$document["name"]. "<br>";
+	echo $document["rollno"]. "<br>";
+	echo $document["likes"]. "<br>";
+	echo $document["url"]. "<br>";
+
+   }
+   
+      
+?>
