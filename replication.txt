@@ -11,3 +11,42 @@ mongorestore C:\Abc\databaseName\collectionName.bson
 
 now go on shell in cmd and show dbs 
 
+//replication
+
+cd \
+C:\>mkdir c:\data1\db c:\data1\log c:\data1\config
+
+C:\>mkdir c:\data2\db c:\data2\log c:\data2\config
+cd c:\data1\config
+
+c:\data1\config>notepad mongod.cnf
+//write this line 
+dbpath=c:\data1\db
+logpath=c:\data1\log\mongod.log
+port=27020
+//same steps for data2 set path till config and make chnage data1 ko data2
+
+C:\Users\Admin> mongod --dbpath "C:\Program Files\MongoDB\Server\5.0\data" --logpath "C:\Program Files\MongoDB\Server\5.0\log\mongod.log" --port 27017 --storageEngine=wiredTiger --journal --replSet testrep
+
+open another cmd
+C:\Users\Admin>mongod --dbpath "C:\data1\db" --logpath "C:\data1\log\mongod.log" --port 27020 --storageEngine=wiredTiger --journal --replSet testrep
+
+open another cmd and dont close prev cmd
+mongo --port 27017
+
+>rsconf={_id:"testrep",members:[{_id:0,host:"localhost:27017"}]}
+>rs.initiate(rsconf)
+>rs.status()
+
+//open another cmd
+mongo --port 27020
+
+now came to primary and add line
+
+>rs.add("localhost:27020")
+
+now in secondary server
+>rs.secondaryOk()
+>show dbs
+
+repeat same for port 27030
