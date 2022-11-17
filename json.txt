@@ -1,0 +1,36 @@
+#creating json
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Creating JSON </title>
+</head>
+<body>
+    <script>
+        var data={
+                    "Bname":"JSON",
+                    "publisher":"TataMcgraw",
+                    "author":"MCgrow",
+                    "price":250
+                };
+        document.writeln(JSON.stringify(data)+"<br/>");
+        document.writeln(JSON.stringify(data,["Bname","author","price"])+"<br/>");
+        document.writeln(JSON.stringify(data,["Bname","author","price"],5));
+    </script>
+</body>
+</html>
+
+
+#prasing json
+<!DOCTYPE html> 
+<html> 
+<body> 
+<script type="text/javascript"> 
+    var data1='{"Bname":"JSON","publisher":"TataMcgraw"}'; 
+    var docx=JSON.parse(data1); 
+    for(key in docx) 
+    { 
+        document.writeln(key+" :"+docx[key]+"<br/>"); 
+    } 
+</script> 
+</body> 
+</html>
