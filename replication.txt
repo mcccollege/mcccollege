@@ -1,0 +1,13 @@
+// to create backup and restore 
+//for backup
+
+open cmd and type:
+mongodump --host=localhost --port 27017 --out C:\Abc
+
+now delete the database throgh mongo shell
+
+open cmd admin mode and type
+mongorestore C:\Abc\databaseName\collectionName.bson
+
+now go on shell in cmd and show dbs 
+
