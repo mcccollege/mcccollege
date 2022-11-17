@@ -1,0 +1,85 @@
+>mongoimport --db ngtpract --collection tycol --file ....location...
+
+Write a MongoDB query to display all the documents in the collection restaurants.
+db.rest.find().pretty()
+
+db.rest.find({},{restaurant_id:1,name:1,borough:1,cuisine:1}).pretty()
+
+db.rest.find({},{restaurant_id:1,name:1,borough:1,cuisine:1,_id:0}).pretty()
+
+db.rest.find({},{restaurant_id:1,name:1,borough:1,"address.zipcode":1,_id:0}).pretty()
+
+db.rest.find({borough:"Bronx"}).pretty()
+
+......................................................................................................
+
+Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which prepared dish except 'American' and 'Chinees' or 
+restaurant's name begins with letter 'Wil'
+db.rest.find( {$or: [ {name: /^Wil/}, {"$and":[ {"cuisine" : {$ne :"American "}}, {"cuisine" :{$ne :"Chinees"}} 
+]} ]} ,{"restaurant_id" : 1,"name":1,"borough":1,"cuisine" :1} ).pretty()
+
+
+db.rest.find({"grades.date": ISODate("2014-0811T00:00:00Z"),"grades.grade":"A" ,"grades.score" : 
+11 },{"restaurant_id" : 1,"name":1,"grades":1}).pretty()
+
+
+db.rest.find({ "grades.1.date": ISODate("2014-0811T00:00:00Z"),"grades.1.grade":"A" ,"grades.1.score" : 
+9},{"restaurant_id" : 1,"name":1,"grades":1} ).pretty()
+
+db.rest.find({"address.coord.1": {$gt : 42, $lte : 52}},{"restaurant_id" : 1,"name":1,"address":1,"coord":1}).pretty()
+
+db.rest.find().sort({"name":1}).pretty()
+
+.....................................................................................................................
+
+Write a MongoDB query to arrange the name of the restaurants in descending along with all the columns
+db.rest.find().sort( {"name":-1} ).pretty()
+
+db.rest.find().sort({"cuisine":1,"borough" : -1,} ).pretty()
+
+db.rest.find({"address.street" :{ $exists :true } } ).pretty()
+
+db.rest.find( {"address.coord" :{$type :1}}).pretty()
+
+db.rest.find( {"grades.score" :{$mod : [7,0]}},{"restaurant_id" : 1,"name":1,"grades":1} ).pretty()
+
+..............................................................................................................
+
+Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which contain 'Reg' as three letters somewhere in its name
+db.rest.find( {"name": /.*Reg.*/}, { "restaurant_id" : 1, "name":1,"borough":1, "cuisine" :1 } ).pretty()
+
+db.rest.find( { "borough": "Bronx" , $or : [ { "cuisine" : "American " }, { "cuisine" : "Chinese" }] } ).pretty()
+
+db.rest.find( {"borough" :{$in :["Staten Island","Queens","Bronx","Brooklyn"]}},{ 
+"restaurant_id" : 1, "name":1,"borough":1, "cuisine" :1 }).pretty()
+
+db.rest.find( {"borough" :{$nin :["Staten Island","Queens","Bronx","Brooklyn"]}}, { "restaurant_id" : 1, 
+"name":1,"borough":1, "cuisine" :1 } ).pretty()
+
+db.rest.find( {"grades.score" : { $not: {$gt : 10} } }, { "restaurant_id" : 1, "name":1,"borough":1, "cuisine" :1 } ).pretty()
+
+..................................................................................................................................
+
+Write a MongoDB query to find the restaurant name, borough, longitude and attitude and cuisine for those restaurants which contains 'mon' as three letters somewhere in its name
+db.rest.find( { name : { $regex : "mon.*", $options: "i" }},{ "name":1,"borough":1,"address.coord":1,"cuisine":1}).pretty()
+
+db.rest.find( { name :{ $regex : /^Mad/i, }},{"name":1,"borough":1,"address.coord":1,"cuisine" :1}).pretty()
+
+db.rest.find({"address.coord" : {$lt : -95.754168}}).pretty()
+
+db.rest.find( {name: /^Wil/}, { "restaurant_id" : 1, "name":1,"borough":1, "cuisine" :1 } ).pretty()
+
+db.rest.find({name: /ces$/}, { "restaurant_id" : 1, "name":1,"borough":1, "cuisine" :1 } ).pretty()
+
+.......................................................................................................................................
+
+Write a MongoDB query to find the restaurants that do not prepare any cuisine of 'American' and their grade score more than 70 and latitude less than - 65.754168
+db.rest.find( {$and: [{"cuisine" : {$ne :"American "}}, {"grades.score" : {$gt : 70}},{"address.coord" : {$lt : -65.754168}} ] } ).pretty()
+
+db.rest.find({"cuisine":{$ne : "American "}, "grades.score" :{$gt: 70},"address.coord" : {$lt : -65.754168}}).pretty()
+
+db.rest.find( {"cuisine" : {$ne : "American "}, "grades.grade" :"A", "borough": "Brooklyn" }).sort({"cuisine":-1}).pretty()
+
+db.rest.find( {name: /^Wil/}, { "restaurant_id" : 1, "name":1,"borough":1, "cuisine" :1 } ).pretty()
+
+db.rest.find({name: /ces$/}, { "restaurant_id" : 1, "name":1,"borough":1, "cuisine" :1 } ).pretty()
