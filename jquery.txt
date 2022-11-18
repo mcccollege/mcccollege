@@ -46,7 +46,13 @@
     </script>
     
     //remove css
-    
+    <syle>
+      .into{
+       background:red;
+       color:green;
+       font-size:120px
+       }
+       </style>
      <p class="intro">Hello World</p>
     <p class="intro">Hello World welcome to mcc</p>
     <button>Remove css</button>
