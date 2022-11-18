@@ -244,3 +244,22 @@
         });
       });
     </script>
+    
+//animate with image
+
+ <style>
+      .img {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Click</button>
+    <img src="./firebae.png" alt="" class="img" />
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          $(".img").animate({ left: "500px" }, 1000);
+        });
+      });
+    </script>
